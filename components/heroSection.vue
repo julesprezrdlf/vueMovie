@@ -13,10 +13,21 @@
             </a> 
         </div>
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img src="https://image.similarpng.com/very-thumbnail/2022/02/Realistic-popcorn-in-paper-box-fast-food-isolated-on-transparent-background-PNG.png" alt="popcorn">
+            <img src="../assets/popcorn.png" alt="popcorn">
         </div>                
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
   </div>
