@@ -1,6 +1,6 @@
 <!-- eslint-disable  -->
 <template>
-  <div class="indexContainer">
+  <div class="indexContainer bg-white dark:bg-black">
     <Navbar/>
     <HeroSection />
 

@@ -12,7 +12,7 @@
                 Explore
             </a> 
         </div>
-        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+        <div class="popcorn hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img src="../assets/popcorn.png" alt="popcorn">
         </div>                
     </div>
@@ -41,4 +41,18 @@ export default {
 
 <style>
 
+.popcorn {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 30px); }
+    100%   { transform: translate(0, -0px); }
+}
 </style>
