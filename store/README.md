@@ -2,6 +2,9 @@
 
 **This directory is not required, you can delete it if you don't want to use it.**
 
+** https://thenextbit.de/en/blog/tailwind-dark-mode-toggle-nuxt-vuex  **
+
+
 This directory contains your Vuex Store files.
 Vuex Store option is implemented in the Nuxt.js framework.
 
