@@ -16,7 +16,7 @@
         @keyup.enter="$fetch"
         v-model.lazy="searchInput"
       />
-      <button v-show="searchInput !== ''" @click="clearSearch" class="button">
+      <button v-if="searchInput !== ''" @click="clearSearch">
         Clear Search
       </button>
     </div>
@@ -25,7 +25,7 @@
 
     <!-- Now playing -->
 
-    <div 
+    <div v-if="searchInput == ''"
       class="moviesContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
     >
       <div class="movie" v-for="(movie, index) in movies" :key="index">
@@ -55,8 +55,48 @@
       </div>
     </div>
 
+<!-- begin searched movies -->
 
-<!-- Movie search -->
+      <div id="movie-grid" class="movies-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+        <div
+          class="movie"
+          v-for="(movie, index) in searchedMovies"
+          :key="index"
+        >
+          <div class="movie-img">
+            <img
+              :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
+              alt=""
+            />
+            <p class="review">{{ movie.vote_average }}</p>
+            <p class="overview">{{ movie.overview }}</p>
+          </div>
+          <div class="info">
+            <p class="title">
+              {{ movie.title.slice(0, 25)
+              }}<span v-if="movie.title.length > 25">...</span>
+            </p>
+            <p class="release">
+              Released:
+              {{
+                new Date(movie.release_date).toLocaleString('en-us', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })
+              }}
+            </p>
+            <NuxtLink
+              class="button button-light"
+              :to="{ name: 'movies-id', params: { id: movie.id } }"
+            >
+              Get More Info
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+
+<!-- end searched movies-->
 
 
 
@@ -67,64 +107,86 @@
 
 
 
+
+  
   </div>
 </template>
 
 <script>
 /*eslint-disable*/
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "IndexPage",
+  name: 'home',
+  head() {
+    return {
+      title: 'Movie App - Latest Streaming Movie Info',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Get all the latest streaming movies in theaters & online',
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: 'movies, stream, stremaing',
+        },
+      ],
+    }
+  },
 
   data() {
     return {
       movies: [],
-      searchInput: '',
       searchedMovies: [],
-    };
+      searchInput: '',
+    }
   },
 
   async fetch() {
     if (this.searchInput === '') {
-      await this.getMovies();
+      await this.getMovies()
       return
     }
 
-  if (this.searchInput !== '') {
-    await this.searchMovies();
-  }
-
+    if (this.searchInput !== '') {
+      await this.searchMovies()
+    }
   },
+  fetchDelay: 1000,
 
   methods: {
     async getMovies() {
       const data = axios.get(
-        // GET YOUR OWN API KEY AT https://www.themoviedb.org/settings/api
-
-        // `https://api.themoviedb.org/3/movie/now_playing?api_key=
-        // API_KEY
-        // &language=en-US&page=1`
-
         `https://api.themoviedb.org/3/movie/now_playing?api_key=9d5bbddde93fb73ec32279ed6f8795c3&language=en-US&page=1`
-      );
-      const result = await data;
+      )
+      const result = await data
       result.data.results.forEach((movie) => {
-        this.movies.push(movie);
-      });
+        this.movies.push(movie)
+      })
     },
 
     async searchMovies() {
       const data = axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=9d5bbddde93fb73ec32279ed6f8795c3&language=en-US&page=1&query=${this.searchInput}`
-      );
-      const result = await data;
+      )
+      const result = await data
       result.data.results.forEach((movie) => {
-        this.searchedMovies.push(movie);
+        this.searchedMovies.push(movie)
       })
-      console.log(this.searchedMovies)
+    },
+
+    clearSearch() {
+      this.searchInput = ''
+      this.searchedMovies = []
     },
   },
-};
+  watch: {
+    searchInput() {
+      console.log(this.searchInput)
+    },
+  },
+}
 </script>
 
 <style scoped>
