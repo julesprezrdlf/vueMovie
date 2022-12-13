@@ -15,5 +15,9 @@ module.exports = {
   plugins: [
   ],
   // add your custom rules here
-  rules: {}
+  rules: {
+    "no-mixed-spaces-and-tabs": 0, // disable rule
+    "no-tabs": 0,
+    'indent': 'off'
+  }
 }

@@ -10,32 +10,29 @@
     <!-- Search -->
 
     <div class="searchContainer bg-white dark:bg-gray-900 my-16 px-10 max-w-xl">
-     <div class="container search">
-      <input
-        type="text"
-        placeholder="Search"
-        @keyup.enter="$fetch"
-        v-model.lazy="searchInput"
-      />
-      <button v-if="searchInput !== ''" @click="clearSearch">
-        Clear Search
-      </button>
-    </div>
+      <div class="container search">
+        <input type="text" placeholder="Search" @keyup.enter="$fetch" v-model.lazy="searchInput" />
+        <button v-if="searchInput !== ''" @click="clearSearch">
+          Clear Search
+        </button>
+      </div>
     </div>
 
     <!-- end search -->
 
+    <!-- Loading  -->
+
+    <LoaderComponent v-if="$fetchState.pending" />
+
+    <!-- end loading  -->
+
     <!-- Now playing -->
 
     <div v-if="searchInput == ''"
-      class="moviesContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-    >
+      class="moviesContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div class="movie" v-for="(movie, index) in movies" :key="index">
         <div class="movieImage">
-          <img
-            :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-            alt=""
-          />
+          <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" />
           <p class="movieRating">{{ movie.vote_average }}</p>
           <p class="moviePlot">{{ movie.overview }}</p>
         </div>
@@ -48,69 +45,47 @@
           <p class="releaseDate">Release: {{ movie.release_date }}</p>
         </div>
 
-        <NuxtLink
-          class="button buttonLight"
-          :to="{ name: 'movies-movieid', params: { movieid: movie.id } }"
-        >
+        <NuxtLink class="button buttonLight" :to="{ name: 'movies-movieid', params: { movieid: movie.id } }">
           Get info
         </NuxtLink>
       </div>
     </div>
 
-<!-- begin searched movies -->
+    <!-- begin searched movies -->
 
-      <div id="movie-grid" class="movies-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-        <div
-          class="movie"
-          v-for="(movie, index) in searchedMovies"
-          :key="index"
-        >
-          <div class="movie-img">
-            <img
-              :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-              alt=""
-            />
-            <p class="review">{{ movie.vote_average }}</p>
-            <p class="overview">{{ movie.overview }}</p>
-          </div>
-          <div class="info">
-            <p class="title">
-              {{ movie.title.slice(0, 25)
-              }}<span v-if="movie.title.length > 25">...</span>
-            </p>
-            <p class="release">
-              Released:
-              {{
+    <div id="movie-grid"
+      class="movies-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 place-content-center gap-10 px-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div class="movie" v-for="(movie, index) in searchedMovies" :key="index">
+        <div class="movie-img">
+          <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" />
+          <p class="review">{{ movie.vote_average }}</p>
+          <p class="overview">{{ movie.overview }}</p>
+        </div>
+        <div class="info">
+          <p class="title">
+            {{ movie.title.slice(0, 25)
+            }}<span v-if="movie.title.length > 25">...</span>
+          </p>
+          <p class="release">
+            Released:
+            {{
                 new Date(movie.release_date).toLocaleString('en-us', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
                 })
-              }}
-            </p>
-            <NuxtLink
-              class="button button-light"
-              :to="{ name: 'movies-id', params: { id: movie.id } }"
-            >
-              Get More Info
-            </NuxtLink>
-          </div>
+            }}
+          </p>
+          <NuxtLink class="button button-light" :to="{ name: 'movies-id', params: { id: movie.id } }">
+            Get More Info
+          </NuxtLink>
         </div>
       </div>
+    </div>
 
-<!-- end searched movies-->
-
-
-
+    <!-- end searched movies-->
 
 
-
-
-
-
-
-
-  
   </div>
 </template>
 
@@ -118,6 +93,7 @@
 /*eslint-disable*/
 import axios from 'axios'
 export default {
+  layout: 'darkModeLayout',
   name: 'home',
   head() {
     return {
@@ -188,7 +164,9 @@ export default {
       console.log(this.searchInput)
     },
   },
+
 }
+
 </script>
 
 <style scoped>
