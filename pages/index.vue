@@ -10,6 +10,7 @@
     <!-- Search -->
 
     <div class="searchContainer bg-white dark:bg-gray-900 my-16 px-10 max-w-xl">
+     <div class="container search">
       <input
         type="text"
         placeholder="Search"
@@ -19,6 +20,7 @@
       <button v-show="searchInput !== ''" @click="clearSearch" class="button">
         Clear Search
       </button>
+    </div>
     </div>
 
     <!-- end search -->
