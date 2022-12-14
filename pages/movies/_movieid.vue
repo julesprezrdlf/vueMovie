@@ -7,7 +7,7 @@
             <p class="review">{{ movie.vote_average }}</p>
             <p class="overview">{{ movie.overview }}</p>
         </div>
-        <div class="info">
+        <div class="info bg-white dark:bg-gray-900">
             <p class="title">
                 {{ movie.title
                 }}
@@ -30,6 +30,7 @@
 /*eslint-disable*/
 import axios from 'axios'
 export default {
+    layout: 'darkModeLayout',
     name: 'single-movie',
     data() {
         return {

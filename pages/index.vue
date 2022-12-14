@@ -1,9 +1,9 @@
 <!-- eslint-disable  -->
 <template>
   <div class="indexContainer bg-white dark:bg-gray-900">
-    <div class="sticky top-0 z-50">
+    <!-- <div class="sticky top-0 z-50">
       <Navbar />
-    </div>
+    </div> -->
 
     <HeroSection />
 

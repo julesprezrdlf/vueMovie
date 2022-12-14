@@ -4,6 +4,9 @@
       class="bg-white dark:bg-black"
       :class="dark ? 'dark' : 'light'"
     >
+    <div class="sticky top-0 z-50">
+      <Navbar />
+    </div>
       <Nuxt />
     </div>
   </template>
