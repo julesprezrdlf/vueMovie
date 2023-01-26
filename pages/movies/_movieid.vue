@@ -1,6 +1,6 @@
 <!-- eslint-disable  -->
 <template>
-    <div class="container bg-white dark:bg-gray-900">
+    <div class="containerMovie bg-white dark:bg-gray-900">
         <h1>{{ movie.title }}</h1>
         <div class="movie-img">
             <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" />
@@ -52,5 +52,7 @@ export default {
 </script>
 
 <style>
-
+.containerMovie {
+width: 100%;
+}
 </style>
