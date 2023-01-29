@@ -5,8 +5,8 @@ export const state = () => ({
   dark: false,
 
   /*cart*/
-  cartCounter : 2,
-  movies: []
+  cartCounter : 0,
+  movies: ["hola","mundo"]
 });
 
 export const getters = {
@@ -32,9 +32,11 @@ export const mutations = {
 ADD_ITEM(state){
 state.cartCounter++;
 },
-
+MORE_MOVIE(state, movie) {
+  state.movies.push({ content: movie });
+},
   ADD_MOVIE(state, movie) {
-    state.movies.push({ content: movie, done: false });
+    state.movies.push({ content: movie});
   },
   REMOVE_MOVIE(state, movie) {
     state.movies.splice(state.movies.indexOf(movie), 1);
@@ -42,3 +44,4 @@ state.cartCounter++;
 };
 
 /*from https://thenextbit.de/en/blog/tailwind-dark-mode-toggle-nuxt-vuex */
+

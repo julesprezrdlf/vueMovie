@@ -2,6 +2,7 @@
 <template>
     <div class="containerMovie bg-white dark:bg-gray-900">
         <h1>HOLA {{ $store.state.cartCounter }}</h1>
+        <h1>{{ $store.state.movies }}</h1>
         <button @click="startCount">SUMAR</button>
         <h1>{{ movie.title }}</h1>
         <div class="movie-img">
@@ -51,6 +52,7 @@ export default {
         },
         startCount () {
             this.$store.commit('ADD_ITEM')
+            this.$store.commit('MORE_MOVIE',this.movie.title)
         }
     }
 }
