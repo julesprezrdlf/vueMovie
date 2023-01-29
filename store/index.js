@@ -5,14 +5,18 @@ export const state = () => ({
   dark: false,
 
   /*cart*/
+  cartCounter : 2,
   movies: []
 });
 
 export const getters = {
   /*dark mode*/
-  dark: (state) => state.dark
+  dark: (state) => state.dark,
 
   /*cart*/
+  storeCounter () {
+    state.cartCounter
+  }
 };
 
 export const mutations = {
@@ -24,6 +28,11 @@ export const mutations = {
   },
 
   /*cart*/
+
+ADD_ITEM(state){
+state.cartCounter++;
+},
+
   ADD_MOVIE(state, movie) {
     state.movies.push({ content: movie, done: false });
   },

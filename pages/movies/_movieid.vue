@@ -1,6 +1,8 @@
 <!-- eslint-disable  -->
 <template>
     <div class="containerMovie bg-white dark:bg-gray-900">
+        <h1>HOLA {{ $store.state.cartCounter }}</h1>
+        <button @click="startCount">SUMAR</button>
         <h1>{{ movie.title }}</h1>
         <div class="movie-img">
             <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" />
@@ -46,6 +48,9 @@ export default {
             const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=9d5bbddde93fb73ec32279ed6f8795c3&language=en-US`)
             const result = await data
             this.movie = result.data
+        },
+        startCount () {
+            this.$store.commit('ADD_ITEM')
         }
     }
 }
