@@ -1,6 +1,6 @@
 <!-- eslint-disable  -->
 <template>
-    <div class="containerMovie bg-white dark:bg-gray-900">
+    <div class="containerMovie bg-white dark:bg-gray-900 w-full">
         <h1>COUNTER: {{ $store.state.cartCounter }}</h1>
         <h1>{{ $store.state.movies }}</h1>
         <h1>{{ movie.id}}</h1>
@@ -61,7 +61,5 @@ export default {
 </script>
 
 <style>
-.containerMovie {
-width: 100%;
-}
+
 </style>
