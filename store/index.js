@@ -6,7 +6,7 @@ export const state = () => ({
 
   /*cart*/
   cartCounter : 0,
-  movies: ["hola","mundo"]
+  movies: []
 });
 
 export const getters = {
@@ -32,12 +32,13 @@ export const mutations = {
 ADD_ITEM(state){
 state.cartCounter++;
 },
-MORE_MOVIE(state, movie) {
-  state.movies.push({ content: movie });
+
+ADD_MOVIE (state, movies) {
+  state.movies.push({...movies})
 },
-  ADD_MOVIE(state, movie) {
-    state.movies.push({ content: movie});
-  },
+
+
+
   REMOVE_MOVIE(state, movie) {
     state.movies.splice(state.movies.indexOf(movie), 1);
   },

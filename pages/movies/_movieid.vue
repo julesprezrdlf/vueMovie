@@ -1,8 +1,9 @@
 <!-- eslint-disable  -->
 <template>
     <div class="containerMovie bg-white dark:bg-gray-900">
-        <h1>HOLA {{ $store.state.cartCounter }}</h1>
+        <h1>COUNTER: {{ $store.state.cartCounter }}</h1>
         <h1>{{ $store.state.movies }}</h1>
+        <h1>{{ movie.id}}</h1>
         <button @click="startCount">SUMAR</button>
         <h1>{{ movie.title }}</h1>
         <div class="movie-img">
@@ -52,7 +53,8 @@ export default {
         },
         startCount () {
             this.$store.commit('ADD_ITEM')
-            this.$store.commit('MORE_MOVIE',this.movie.title)
+            // this.$store.commit('ADD_MOVIE',this.movie.id, this.movie.title)
+            this.$store.commit('ADD_MOVIE', { id: this.movie.id, title: this.movie.title })
         }
     }
 }
