@@ -10,6 +10,7 @@
     <h1>{{ $store.state.movies }}</h1>
     <h1>{{ movie.id }}</h1>
     <button @click="startCount">SUMAR</button>
+    <button @click="substractCount">RESTAR</button>
     <br></br>
     <button @click="addMovie">ADD MOVIE</button>
     <h1>{{ movie.title }}</h1>
@@ -72,6 +73,10 @@ export default {
         id: this.movie.id,
         title: this.movie.title,
       });
+    },
+
+    substractCount(){
+      this.$store.commit("REMOVE_ITEM")
     },
     addMovie() {
       const foundObject = this.$store.state.movies.find(

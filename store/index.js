@@ -37,7 +37,10 @@ ADD_MOVIE (state, movies) {
   state.movies.push({...movies})
 },
 
-
+REMOVE_ITEM(state,movie){
+  state.cartCounter--;
+  state.movies.splice(state.movies.indexOf(movie), 1);
+},
 
   REMOVE_MOVIE(state, movie) {
     state.movies.splice(state.movies.indexOf(movie), 1);
